@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{ str }}
+        <app-header v-bind:propsdata="num"></app-header>
+        <app-content v-on:pass="deliverPlusNumber"></app-content>
+        <app-content2 v-on:pass2="deliverMinusNumber"></app-content2>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var appHeader = {
+            template: '<div>Header: "I got {{ propsdata }}"</div>',
+            props: ['propsdata']
+        }
+        var appContent = {
+            template: '<div>content<button v-on:click="passPlusNumber">pass</button></div>',
+            methods: {
+                passPlusNumber: function() {
+                    this.$emit('pass', 10); // appContent에서 직접 appHeader로 데이터를 쏘면 좋겠지만.. 바로 가는 길이 막혀 있음. 상위 컴포넌트로 보내서 다시 내려야 함;;; 즉, 올릴 때 event, 내릴 때 props 속성이 필요!
+                }
+            }
+        }
+        var appContent2 = {
+            template: '<div>content2<button v-on:click="passMinusNumber">pass2</button></div>',
+            methods: {
+                passMinusNumber: function() {
+                    this.$emit('pass2', 10);
+                }
+            }
+        }
+
+        new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent,
+                'app-content2': appContent2
+            },
+            data: {
+                num: 0
+            },
+            methods: {
+                deliverPlusNumber: function(value) {
+                    this.num += value;
+                },
+                deliverMinusNumber: function(value) {
+                    this.num -= value;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
