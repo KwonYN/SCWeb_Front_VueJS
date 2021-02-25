@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .warning {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 기본적인 바인딩 -->
+        <p v-bind:class="cname">
+            Hello
+        </p>
+        <!-- isError 값에 따라 class를 넣어줄 수도, 안 넣을 수도! 
+             즉, isError가 false면 warning이라는 class가 바인딩되지 않아 기본 스타일이지만,
+             isError가 true라면 class="warning"이 되기 때문에 빨간색 글씨 스타일 적용됨!
+             && {  } 괄호가 있어야 됨!!! 없으면 에러 뜸;; -->
+        <p v-bind:class="{ warning: isError }">
+            Hello~
+        </p>
+
+        <p v-bind:class="errorTextColor">
+            Hello~2
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isError: false,
+                isError2: false,
+                cname: 'blue-text'
+            },
+            computed: {
+                errorTextColor: function() {
+                    // if(this.isError2) {
+                    //     return 'warning';
+                    // }
+                    // return null;
+                    // 이런 if 조건식을 삼항연산자로 표현!
+                    return this.isError2 ? 'warning' : null;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

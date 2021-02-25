@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>Data Binding</p>
+        <!-- 데이터 바인딩(콧수염 괄호)과 computed 속성 -->
+        <p>{{ num }}</p>
+        <p>{{ doubleNum }}</p>
+
+        <p>Directive</p>
+        <!-- 디렉티브: v-bind -->
+        <p v-bind:id="uuid" v-bind:class="name">{{ num }}</p>
+        <p id="abc1234" class="text-blue">{{ num }}</p>
+
+        <!-- 로딩 중이면 위의 div element를, 
+             접속됐다면 아래의 div element를 표시하고 싶다!!? -->
+        <!-- 디렉티브: v-if -->
+        <div v-if="loading">
+            Loading...
+        </div>
+        <div v-else="">
+            test user has been logged in !!
+        </div>
+
+        <!-- 디렉티브: v-show -->
+        <div v-show="loading">
+            Loading..
+        </div>
+        <!-- loading 속성이 false로 바뀌었다면? 
+            => v-if는 DOM 상에서도 완전히 제거, 
+               But, v-show는 DOM에서는 제거되지만 css에서 style="display: none;"으로 눈으로 안 보이게 됨 -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                str: 'hi',
+                num: 10,
+                uuid: 'abc1234', // Vue 내부적으로 특정 로직에 의해서 id가 'abc1234'인 태그를 관리하고 싶다면!?!? → 이렇게 선언해줌으로써 데이터 속성을 관리 가능! → 단, 'v-' 속성을 이용!
+                name: 'text-blue',
+                loading: true,
+            },
+            computed: {
+                doubleNum: function() {
+                    return this.num*2;
+                },
+            }
+        });
+    </script>
+</body>
+</html>

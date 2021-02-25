@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="increaseNum">increase to {{ num }}</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 9,
+            },
+            methods: {
+                increaseNum: function() {   // button 클릭 시 +1 해주는 이벤트
+                    this.num += 1;
+                },
+                logText: function() {   // num이 변화했을 때 log 찍는 이벤트!?!? → 이 때 'watch' 속성 이용!
+                    console.log('Changed!');
+                }
+            },
+            watch: {    // 기본적으로 data 속성을 대상으로 함! → data의 변화에 따른 특정 로직 실행할 수 있는 Vue의 속성
+                num: function() {
+                    this.logText();
+                }
+            },
+        });
+    </script>
+</body>
+</html>

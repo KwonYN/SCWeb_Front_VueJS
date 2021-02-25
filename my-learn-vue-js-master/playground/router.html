@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <router-link to="/login">Login</router-link>
+            <!-- 결과적으로 <a href="/login">Login</a> 형태의 그림이 그려짐 -->
+            <router-link to="/main">Main</router-link>
+        </div>
+        <!-- Vue 인스턴스에 Vue-router 인스턴스를 연결해야 사용 가능!! -->
+        <router-view></router-view>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- script:src + Tab ▶ <script src=""></src>가 자동완성됨 -->
+    <!-- vue.js 스크립트 먼저 나와야 하고, 그 다음에 vue-router.js 스크립트가 나와야하겠지? -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        var LoginComponent = {
+            template: '<div>login</div>'
+        }
+        var MainComponent = {
+            template: '<div>main</div>'
+        }
+
+        // vue-router 생성
+        var router = new VueRouter({
+            // 페이지의 라우팅 정보 (어떤 url로 들어갔을 때, 어떤 페이지가 들어가는지?): 배열로
+            routes: [   // 페이지의 개수만큼 객체({ ~~ })가 들어감
+                // login 페이지 정보
+                {
+                    // 페이지의 url 이름
+                    path: '/login',
+                    // 컴포넌트 이름 : Cf. .vue 파일로 작성했다면 반영됨. 하지만 이건 html이라 반여 안됨;;ㅋ
+                    name: 'login',
+                    // 해당 url에서 표시될 컴포넌트
+                    component: LoginComponent
+                },
+                // main 페이지 정보
+                {
+                    path: '/main',
+                    name: 'main',
+                    component: MainComponent
+                }
+            ]
+        });
+
+        // vue 인스턴스 생성 (<Root> 컴포넌트)
+        new Vue({
+            el: '#app',
+            // 순서대로 Vue 인스턴스 내에 설정되어 있는 router 속성(el, methods, data 등과 같이): VueRouter 변수
+            router: router, // Vue 인스턴스에 Vue-router 연결
+            components: { // 여긴 components네!! 뷰 라우터 안에는 component인데!
+
+            }
+        });
+    </script>
+</body>
+</html>

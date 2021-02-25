@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{ num }}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 19
+            },
+            // validation, 간단한 연산, 텍스트 등에 활용하는 것에 적합!
+            computed: { // 단순한 값에 대한 계산 (비교적 가벼운 로직)
+                doubleNum: function() {
+                    return this.num * 2;
+                }
+            },
+            // 계속 data 속성 내 값의 변화를 추적! → 무거운 동작들, 특히 데이터 요청에 적합! + 메서드와 함께 사용하는 것이 좋음
+            watch: {    // 비교적 무거운 로직 (매번 실행되는 것이 부담됨;;)
+                num: function(newValue, oldValue) { // watch 함수의 인자로는 바뀐 후의 값, 전의 값이라고 함
+                    this.fetchUserByNumber(newValue);
+                }
+            },
+            methods: {
+                fetchUserByNumber: function(num) {
+                    console.log(num);
+                    // axios.get(num);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

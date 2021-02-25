@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- ToDo: input box를 만들고, 
+                   입력된 값을 p 태그에 출력하라! -->
+
+        <!-- 공홈에서 긁어온 것! -->
+        <!-- <input v-model="message" placeholder="edit me">
+        <p>Message is: {{ message }}</p> -->
+
+        <!-- 구현  -->
+        <input v-model="inputStr" placeholder="type here">
+        <p>Reactivity : {{ inputStr }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                inputStr: ''
+            }
+        });
+    </script>
+</body>
+</html>
